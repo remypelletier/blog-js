@@ -10,10 +10,15 @@ import {
 import { Post as PostModel, User as UserModel } from '@prisma/client';
 import { UserService } from './user/user.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
+import { AuthService } from './auth/auth.service';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Controller()
 export class AppController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('user')
   async signupUser(
@@ -30,6 +35,12 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  async profile() {
+    return 'profile view or datas';
   }
 }
