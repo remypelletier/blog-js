@@ -1,17 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-  UseGuards,
-  Request,
-} from '@nestjs/common';
-import { Post as PostModel, User as UserModel } from '@prisma/client';
+import { Controller, Get, Post, Body, Request } from '@nestjs/common';
+import { User as UserModel } from '@prisma/client';
 import { UserService } from './user/user.service';
-import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Controller()
 export class AppController {
@@ -32,13 +22,12 @@ export class AppController {
     return this.userService.users({});
   }
 
-  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    console.log(req.body);
+    return this.authService.login(req.body);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
   async profile() {
     return 'profile view or datas';
