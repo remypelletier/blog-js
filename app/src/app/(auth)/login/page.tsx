@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 
-const login = () => {
+const Login = () => {
   const [emailFormValue, setEmailFormValue] = useState("");
   const [passwordFormValue, setPasswordFormValue] = useState("");
 
@@ -53,4 +52,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

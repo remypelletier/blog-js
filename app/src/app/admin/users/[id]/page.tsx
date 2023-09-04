@@ -1,4 +1,4 @@
-import getUserById from "@/lib/getUserById";
+import { getOneUser } from "@/api/user";
 
 type Params = {
   params: {
@@ -6,7 +6,7 @@ type Params = {
   };
 };
 export default async function UserPage({ params }: Params) {
-  const user = await getUserById(params.id);
+  const user = await getOneUser(Number(params.id));
   return (
     <div>
       <h1>User detail</h1>

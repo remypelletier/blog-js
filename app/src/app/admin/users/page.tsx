@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import getAllUsers from "@/lib/getAllUsers";
-import { User } from "../../../../types";
+import { getAllUsers } from "@/api/user";
+import { User } from "@/types";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default async function UsersPage() {
       <ul>
         {users.map((user) => {
           return (
-            <li>
+            <li key={user.id}>
               <p>
                 <span>{user.name} </span>
                 <span>{user.email} </span>
