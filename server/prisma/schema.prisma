@@ -59,7 +59,7 @@ model Project {
   title       String   @db.VarChar(256)
   description String   @db.Text
   content     String   @db.Text
-  createdAt   DateTime
+  createdAt   DateTime @default(now())
 }
 
 model Comment {
