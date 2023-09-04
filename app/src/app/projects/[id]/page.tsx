@@ -5,7 +5,7 @@ type Params = {
     id: string;
   };
 };
-export default async function ProjectPage({ params }: Params) {
+export default async function PageProject({ params }: Params) {
   const { id, slug, title, description, content, createdAt } =
     await getOneProject(Number(params.id));
   return (

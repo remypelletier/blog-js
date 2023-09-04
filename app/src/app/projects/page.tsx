@@ -2,7 +2,7 @@ import { getAllProjects } from "@/api/project";
 import { Card, Flex, Text, Heading, Button } from "@radix-ui/themes";
 import Link from "next/link";
 
-export default async function ProjectsPage() {
+export default async function PageProjects() {
   const projects = await getAllProjects();
   return (
     <Flex gap="2">
