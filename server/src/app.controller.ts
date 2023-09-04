@@ -5,9 +5,11 @@ import {
   Body,
   Request,
   UseGuards,
+  Query,
+  Param,
 } from '@nestjs/common';
 import { User as UserModel } from '@prisma/client';
-import { UserService } from './user/user.service';
+import { UserDTO, UserService } from './user/user.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -20,14 +22,28 @@ export class AppController {
 
   @Post('user')
   async signupUser(
-    @Body() userData: { name?: string; email: string },
+    @Body() userData: { name: string; email: string; password: string },
   ): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 
-  @Get('user')
-  async getAllUser(): Promise<UserModel[]> {
+  @Get('users')
+  async getAllUser(
+    @Query('email') email: string,
+  ): Promise<UserModel[] | UserModel> {
+    console.log('Endpoint: Users');
+    if (email) {
+      return this.userService.user({ email: email });
+    }
     return this.userService.users({});
+  }
+
+  @Get('users/:id')
+  async getUser(@Param('id') id: string): Promise<UserModel | UserDTO> {
+    console.log('Endpoint: User');
+    return this.userService.user({
+      id: parseInt(id),
+    });
   }
 
   @UseGuards(AuthGuard('local'))
