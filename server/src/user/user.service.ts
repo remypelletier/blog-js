@@ -1,13 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { User, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: Prisma.UserCreateInput): Promise<User> {
-    return this.prisma.user.create({ data });
+  async create(user: Prisma.UserCreateInput): Promise<User> {
+    if (await this.findOne({ email: user.email })) {
+      throw new ConflictException('Email duplicated');
+    }
+    return this.prisma.user.create({
+      data: {
+        ...user,
+        password: await hash(user.password, 10),
+      },
+    });
   }
 
   findAll(params: {

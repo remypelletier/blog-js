@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { login } from "@/lib/auth";
 
 const Login = () => {
   const [emailFormValue, setEmailFormValue] = useState("");
@@ -14,19 +15,18 @@ const Login = () => {
   const handleSubmit = () => {
     console.log(`email: ${emailFormValue}`);
     console.log(`password: ${passwordFormValue}`);
-    // axios
-    //   .post("localhost:3001/auth/login", {
-    //     email: emailFormValue,
-    //     password: passwordFormValue,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     const accessToken = response.data.access_token;
-    //     if (accessToken) document.cookie = `blogjsjwt=${accessToken}`;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    fetch(`/api/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailFormValue,
+        password: passwordFormValue,
+      }),
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   return (

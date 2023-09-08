@@ -1,4 +1,4 @@
-import { getAllProjects } from "@/api/project";
+import { getAllProjects } from "@/lib/project";
 import { Card, Flex, Text, Heading, Button } from "@radix-ui/themes";
 import Link from "next/link";
 

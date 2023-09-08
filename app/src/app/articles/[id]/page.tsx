@@ -1,4 +1,4 @@
-import { getOneArticle } from "@/api/post";
+import { getOneArticle } from "@/lib/post";
 import { Box, Flex, Heading } from "@radix-ui/themes";
 type Params = {
   params: {

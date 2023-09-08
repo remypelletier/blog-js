@@ -17,11 +17,13 @@ export class ProjectController {
 
   @Post()
   create(@Body() createProjectDto: Prisma.ProjectCreateInput) {
+    console.log('Post');
     return this.projectService.create(createProjectDto);
   }
 
   @Get()
   findAll(@Query() query: any) {
+    console.log('FindAll');
     if (query.projectId) {
       query.projectId = Number(query.projectId);
     }
@@ -30,6 +32,7 @@ export class ProjectController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
+    console.log('Find:id');
     return this.projectService.findOne({ id: Number(id) });
   }
 

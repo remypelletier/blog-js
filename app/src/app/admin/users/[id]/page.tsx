@@ -1,4 +1,4 @@
-import { getOneUser } from "@/api/user";
+import { getOneUser } from "@/lib/user";
 
 type Params = {
   params: {

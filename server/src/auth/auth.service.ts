@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<User> | null {
     const user = await this.userService.findOne({ email: email });
-    if (user && user.password === password) {
+    if (user && (await compare(password, user.password))) {
       const { ...result } = user;
       return result;
     }
@@ -22,7 +23,12 @@ export class AuthService {
   async login(user: User) {
     const payload = { email: user.email, sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      accessToken: this.jwtService.sign(payload),
     };
   }
 }

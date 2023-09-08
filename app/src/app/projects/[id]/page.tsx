@@ -1,4 +1,4 @@
-import { getOneProject } from "@/api/project";
+import { getOneProject } from "@/lib/project";
 import { Flex, Heading, Box } from "@radix-ui/themes";
 type Params = {
   params: {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllUsers } from "@/api/user";
+import { getAllUsers } from "@/lib/user";
 import { User } from "@/types";
 import Link from "next/link";
 
