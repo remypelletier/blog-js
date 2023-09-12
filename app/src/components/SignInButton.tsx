@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export const SignInButton = () => {
   const { data: session } = useSession();
-  //console.log(session);
   if (session && session.user)
     return (
       <div>

@@ -1,5 +1,4 @@
 import { getOneArticle } from "@/lib/post";
-import { Box, Flex, Heading } from "@radix-ui/themes";
 type Params = {
   params: {
     id: string;
@@ -18,9 +17,11 @@ export default async function PageArticle({ params }: Params) {
     userId,
   } = await getOneArticle(Number(params.id));
   return (
-    <Box>
-      <Heading as="h3">{title}</Heading>
-      <p>{description}</p>
-    </Box>
+    <div className="bg-slate-100 py-16">
+      <div className="container mx-auto">
+        <h1 className="text-6xl text-gray-900 font-bold mb-4">{title}</h1>
+        <p className="text-xl text-gray-500 mb-8">{description}</p>
+      </div>
+    </div>
   );
 }

@@ -1,28 +1,13 @@
-import type { GetServerSideProps, Metadata } from "next";
-import "@radix-ui/themes/styles.css";
-import { Box, Flex, Link, Theme } from "@radix-ui/themes";
-import { Navbar } from "./components/Navbar";
-import Providers from "./components/Providers";
+import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Remsapp Blog",
-};
-
-export default async function RootLayout(props: any) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body style={{ margin: 0 }}>
-        <Providers>
-          <Theme appearance="dark">
-            <Flex direction="column" style={{ minHeight: "100vh" }}>
-              <Navbar />
-              <Box style={{ flex: 1 }}>{props.children}</Box>
-              <Box height="6"></Box>
-            </Flex>
-          </Theme>
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
