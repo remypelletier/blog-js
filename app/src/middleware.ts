@@ -1,21 +1,13 @@
-import { withAuth } from "next-auth/middleware";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default withAuth(
-  // `withAuth` augments your `Request` with the user's token.
-  function middleware(req) {
-    console.log(req.nextauth.token);
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        // if (token?.user.role === "ADMIN") {
-        //   return true;
-        // }
-        // return false;
-        return true;
-      },
-    },
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  if (
+    request.nextUrl.pathname.startsWith("/login") &&
+    request.cookies.has(String(process.env.AUTH_COOKIE_NAME))
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
-);
-
-export const config = { matcher: ["/admin"] };
+}

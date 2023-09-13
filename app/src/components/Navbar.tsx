@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { SignInButton } from "./SignInButton";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export function Navbar() {
+type Params = {
+  isLoggedIn: boolean;
+};
+
+export function Navbar({ isLoggedIn }: Params) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,9 +35,21 @@ export function Navbar() {
               </Link>
             </li>
           </ul>
-          <Link href="/login" className="hidden md:flex text-grey">
-            Login
-          </Link>
+          {isLoggedIn ? (
+            <button
+              onClick={() => {
+                fetch("/api/logout").then((res) => {
+                  router.refresh();
+                });
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link href="/login" className="hidden md:flex text-grey">
+              Login
+            </Link>
+          )}
           {/* Bouton hamburger */}
           <button
             className="md:hidden flex items-center"
@@ -70,9 +88,21 @@ export function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/login" className="block text-grey">
-                Login
-              </Link>
+              {isLoggedIn ? (
+                <Link href="/login" className="block text-grey">
+                  Login
+                </Link>
+              ) : (
+                <button
+                  onClick={() => {
+                    fetch("/api/logout").then((res) => {
+                      router.refresh();
+                    });
+                  }}
+                >
+                  Logout
+                </button>
+              )}
             </li>
           </ul>
         )}
