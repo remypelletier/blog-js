@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { getAllUsers } from "@/lib/user";
 import { User } from "@/types";
 import Link from "next/link";
@@ -6,17 +7,27 @@ import Modal from "@/components/Modal";
 import { AddEntry } from "@/components/AddEntry";
 import { uid } from "uid";
 import { DeleteBtn } from "@/components/DeleteBtn";
+import useSWR from "swr";
 
-export const metadata: Metadata = {
-  title: "Users",
-};
+function useUsers() {
+  const { data, error, isLoading } = useSWR(`/users/`, getAllUsers);
 
-export default async function UsersPage() {
-  const usersPromise: Promise<User[]> = getAllUsers();
-  const users = await usersPromise;
+  return {
+    users: data,
+    isLoading,
+    isError: error,
+  };
+}
+
+export default function UsersPage() {
+  const { users, isLoading, isError } = useUsers();
+
+  if (isError) return <div>échec du chargement</div>;
+  if (isLoading) return <div>chargement...</div>;
+
   const tableData = {
     head: ["#", "Name", "Email", "Actions"],
-    body: users.map((user) => {
+    body: users.map((user: any) => {
       return [
         user.id,
         user.name,
@@ -26,8 +37,6 @@ export default async function UsersPage() {
       ];
     }),
   };
-
-  const handleSubmit = () => {};
 
   return (
     <div>

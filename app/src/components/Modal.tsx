@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { FormSelect } from "./FormSelect";
 import * as Form from "@radix-ui/react-form";
 import { createOneUser } from "@/lib/user";
+import useSWR, { useSWRConfig } from "swr";
 
 // { name, email, role }
 const Modal = () => {
+  const { mutate } = useSWRConfig();
+  const [open, setOpen] = useState(false);
+
   const handleSubmit = (e: any) => {
     console.log("yo");
     e.preventDefault();
@@ -24,13 +28,15 @@ const Modal = () => {
       .then((res) => {
         console.log("USER CREATED !!!! YIIIPPIIIII");
         console.log(res);
+        setOpen(false);
+        mutate("/users/");
       })
       .catch((err) => {
         console.log(err);
       });
   };
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button className="text-violet11 shadow-blackA7 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
           Add a user

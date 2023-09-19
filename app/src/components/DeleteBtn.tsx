@@ -2,12 +2,15 @@
 
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { deleteOneUser } from "@/lib/user";
+import useSWR, { useSWRConfig } from "swr";
 
 type params = {
   id: number;
 };
 
 export const DeleteBtn = ({ id }: params) => {
+  const { mutate } = useSWRConfig();
+
   const handleClick = (e: any, action: string) => {
     if (action !== "confirm") return;
 
@@ -15,6 +18,7 @@ export const DeleteBtn = ({ id }: params) => {
     deleteOneUser(id)
       .then((res) => {
         console.log(res);
+        mutate("/users/");
       })
       .catch((err) => {
         console.log(err);

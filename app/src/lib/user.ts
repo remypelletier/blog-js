@@ -1,4 +1,4 @@
-const API_ENDPOINT = "http://localhost:3001/";
+export const API_ENDPOINT = "http://localhost:3001/";
 
 export const getAllUsers = async () => {
   const res = await fetch(`${API_ENDPOINT}user/`);
