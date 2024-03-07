@@ -6,11 +6,10 @@ import useSWR, { useSWRConfig } from "swr";
 
 type params = {
   id: number;
+  handleDelete: any;
 };
 
-export const DeleteBtn = ({ id }: params) => {
-  const { mutate } = useSWRConfig();
-
+export const DeleteBtn = ({ id, handleDelete }: params) => {
   const handleClick = (e: any, action: string) => {
     if (action !== "confirm") return;
 
@@ -18,7 +17,7 @@ export const DeleteBtn = ({ id }: params) => {
     deleteOneUser(id)
       .then((res) => {
         console.log(res);
-        mutate("/users/");
+        handleDelete(id);
       })
       .catch((err) => {
         console.log(err);

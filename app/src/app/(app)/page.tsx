@@ -10,14 +10,14 @@ import ContactForm from "@/components/ContactForm";
 export default function Home() {
   return (
     <div>
-      <div className="flex justify-center items-center min-h-screen bg-slate-300">
-        <div className="flex container mx-auto">
-          <div className="flex justify-center items-center w-1/3">
+      <div className="flex items-center justify-center min-h-screen bg-slate-300">
+        <div className="container flex mx-auto">
+          <div className="flex items-center justify-center w-1/3">
             <div>
-              <h1 className="text-7xl mb-4 font-bold text-slate-900">
-                Start building <br /> your app now
+              <h1 className="mb-4 font-bold text-7xl text-slate-900">
+                Rémy Pelletier <br />
               </h1>
-              <p className="text-xl mb-2 text-gray-700">
+              <p className="mb-2 text-xl text-gray-700">
                 An open source component library optimized for fast development,
                 easy maintenance, and accessibility. Just import and go—no
                 configuration required.
@@ -28,7 +28,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="flex justify-center items-center w-2/3">
+          <div className="flex items-center justify-center w-2/3">
             <Image
               src="/profile.webp"
               alt="profile"
@@ -39,19 +39,19 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-slate-100 py-16">
+      <div className="py-16 bg-slate-100">
         <div className="container mx-auto">
-          <h2 className="text-6xl text-gray-900 font-bold mb-4">
+          <h2 className="mb-4 text-6xl font-bold text-gray-900">
             Core building blocks <br />
             for your design system
           </h2>
-          <p className="text-xl text-gray-500 mb-8">
+          <p className="mb-8 text-xl text-gray-500">
             Unstyled, accessible, open source React primitives
             <br />
             for high-quality web apps and design systems.
           </p>
         </div>
-        <ul className="overflow-x-scroll flex max-w-full">
+        <ul className="flex max-w-full overflow-x-scroll">
           <li className="m-2 min-w-[400px]">
             <Card
               image={{ src: "/profile.webp", alt: "Image de profile" }}
@@ -117,13 +117,13 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <div className="bg-slate-300 py-16">
+      <div className="py-16 bg-slate-300">
         <div className="container mx-auto">
-          <h2 className="text-6xl text-gray-900 font-bold mb-4">
+          <h2 className="mb-4 text-6xl font-bold text-gray-900">
             Core building blocks <br />
             for your design system
           </h2>
-          <p className="text-xl text-gray-500 mb-8">
+          <p className="mb-8 text-xl text-gray-500">
             Unstyled, accessible, open source React primitives
             <br />
             for high-quality web apps and design systems.
@@ -181,14 +181,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-slate-100 py-16">
+      <div className="py-16 bg-slate-100">
         <div className="container mx-auto">
           <div className="container mx-auto">
-            <h2 className="text-6xl text-gray-900 font-bold mb-4">
+            <h2 className="mb-4 text-6xl font-bold text-gray-900">
               Core building blocks <br />
               for your design system
             </h2>
-            <p className="text-xl text-gray-500 mb-8">
+            <p className="mb-8 text-xl text-gray-500">
               Unstyled, accessible, open source React primitives
               <br />
               for high-quality web apps and design systems.
@@ -199,13 +199,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-slate-300 py-16">
+      <div className="py-16 bg-slate-300">
         <div className="container mx-auto text-center">
-          <h2 className="text-6xl text-gray-900 font-bold mb-4">
+          <h2 className="mb-4 text-6xl font-bold text-gray-900">
             Core building blocks <br />
             for your design system
           </h2>
-          <p className="text-xl text-gray-500 mb-8">
+          <p className="mb-8 text-xl text-gray-500">
             Unstyled, accessible, open source React primitives
             <br />
             for high-quality web apps and design systems.

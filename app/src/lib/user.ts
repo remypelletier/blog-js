@@ -1,7 +1,13 @@
 export const API_ENDPOINT = "http://localhost:3001/";
 
-export const getAllUsers = async () => {
-  const res = await fetch(`${API_ENDPOINT}user/`);
+export const getUserNumber = async () => {
+  const res = await fetch(`${API_ENDPOINT}user?count=true`);
+  if (!res.ok) throw new Error("Failed to fetch data");
+  return res.json();
+};
+
+export const getAllUsers = async (page: number) => {
+  const res = await fetch(`${API_ENDPOINT}user?page=${page}`);
   if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 };

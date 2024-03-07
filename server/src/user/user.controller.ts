@@ -17,15 +17,29 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
-    this.userService.create(createUserDto);
+    return this.userService.create(createUserDto);
   }
 
   @Get()
   findAll(@Query() query: any) {
+    let pagination = {};
+    const querySearch = {
+      role: query?.role,
+      email: query?.email,
+      name: query?.name,
+    };
     if (query.userId) {
       query.userId = Number(query.userId);
     }
-    return this.userService.findAll({ where: query });
+    if (query.page) {
+      pagination['skip'] = (Number(query.page) - 1) * 10;
+      pagination['take'] = 10;
+    }
+    console.log(query);
+    if (query.count) {
+      return this.userService.agregate({ _count: { id: true } });
+    }
+    return this.userService.findAll({ where: querySearch, ...pagination });
   }
 
   @Get(':id')

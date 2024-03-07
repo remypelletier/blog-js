@@ -22,8 +22,12 @@ export class UserService {
   findAll(params: {
     where?: Prisma.UserWhereInput;
     orderBy?: Prisma.UserOrderByWithRelationInput;
+    skip?: number;
+    take?: number;
   }): Promise<User[]> {
     return this.prisma.user.findMany({
+      skip: params.skip,
+      take: params.take,
       where: params.where,
       orderBy: params.orderBy,
     });
@@ -46,6 +50,12 @@ export class UserService {
   remove(where: Prisma.UserWhereUniqueInput): Promise<User> {
     return this.prisma.user.delete({
       where,
+    });
+  }
+
+  agregate(agregateQuery: any): Promise<any> {
+    return this.prisma.user.aggregate({
+      ...agregateQuery,
     });
   }
 }
